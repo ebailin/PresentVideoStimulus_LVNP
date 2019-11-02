@@ -1,0 +1,261 @@
+<!doctype html5>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="description" content="Displays the first run (run 'A') for the human hallway fMRI study"/>
+	<meta name="author" content="Emma Bailin" />
+	<meta name="creation date" content="July 18, 2019"/>
+	<meta name="modified" content="July 18, 2019"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<style>
+	video#playlist{
+		/*visibility: hidden;*/
+/*	position: fixed; right:0; bottom:0;
+	min-width: 100%; min-height:100%;
+	width: auto; height:auto; z-index: -100;*/
+	width:100%; height:auto; z-index: -100;
+}
+
+</style>
+<script src="jquery-3.4.1.min.js"></script>
+</head>
+<div id="hidden_info">
+	
+</div>
+<div id="player" class="player">
+	<video id="playlist" preload="auto" autofocus >
+		<!-- <source src="C:/Users/BENNETCH.20-3-MERA0359/Desktop/VisualCrowding_hallway\fMRI_Hallway_all_updated_clips\BLANK_HALLWAY.mp4" type="video/mp4"> -->
+		<source src="/Users/esbailin/Desktop/hallway/hallway_fmri/app/static/fMRI_Hallway_all_updated_clips/BLANK_HALLWAY.mp4" type="video/mp4">
+			<!-- <source src="/home/gvh/Documents/Subjects/Scripts/VisualCrowding_hallway/Human_Hallway_fmri_clips/High_R2L.mp4" type="video/mp4" name="clip2"> -->
+				<!-- <source src=/home/gvh/Documents/Subjects/Scripts/VisualCrowding_hallway/Human_Hallway_fmri_clips/High_R2L.mp4 type="video/mp4" name="clip3"> -->
+				</video>
+				<figcaption id="video_links">
+					<a class="" href="High_L2L.mp4" name="High_L2L" rel="preload" as="video"></a>
+					<a class="" href="High_L2R.mp4" name="High_L2R" rel="preload" as="video"></a>
+					<a class="" href="High_R2L.mp4" name="High_R2L" rel="preload" as="video"></a>
+					<a class="" href="High_R2R.mp4" name="High_R2R" rel="preload" as="video"></a>
+					<a class="" href="Low_L2L.mp4" name="Low_L2L" rel="preload" as="video"></a>
+					<a class="" href="Low_L2R.mp4" name="Low_L2R" rel="preload" as="video"></a>
+					<a class="" href="Low_R2L.mp4" name="Low_R2L" rel="preload" as="video"></a>
+					<a class="" href="Low_R2R.mp4" name="Low_R2R" rel="preload" as="video"></a>
+					<a class="" href="Medium_L2L.mp4" name="Medium_L2L" rel="preload" as="video"></a>
+					<a class="" href="Medium_L2R.mp4" name="Medium_L2R" rel="preload" as="video"></a>
+					<a class="" href="Medium_R2L.mp4" name="Medium_R2L" rel="preload" as="video"></a>
+					<a class="" href="Medium_R2R.mp4" name="Medium_R2R" rel="preload" as="video"></a>
+					<a class="" href="NoPrinc_High1.mp4" name="NoPrinc_High1" rel="preload" as="video"></a>
+					<a class="" href="NoPrinc_High2.mp4" name="NoPrinc_High2" rel="preload" as="video"></a>
+					<a class="" href="NoPrinc_High3.mp4" name="NoPrinc_High3" rel="preload" as="video"></a>
+					<a class="" href="NoPrinc_High4.mp4" name="NoPrinc_High4" rel="preload" as="video"></a>
+					<a class="" href="BLANK_HALLWAY.mp4" name="BLANK_HALLWAY" rel="preload" as="video"></a>
+
+		<!-- <a class="" href="..\fMRI_Hallway_all_updated_clips\High_L2L.mp4" name="High_L2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\High_L2R.mp4" name="High_L2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\High_R2L.mp4" name="High_R2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\High_R2R.mp4" name="High_R2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Low_L2L.mp4" name="Low_L2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Low_L2R.mp4" name="Low_L2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Low_R2L.mp4" name="Low_R2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Low_R2R.mp4" name="Low_R2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Medium_L2L.mp4" name="Medium_L2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Medium_L2R.mp4" name="Medium_L2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Medium_R2L.mp4" name="Medium_R2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Medium_R2R.mp4" name="Medium_R2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\NoPrinc_High1.mp4" name="NoPrinc_High1"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\NoPrinc_High2.mp4" name="NoPrinc_High2"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\NoPrinc_High3.mp4" name="NoPrinc_High3"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\NoPrinc_High4.mp4" name="NoPrinc_High4"></a> -->
+	</figcaption>
+<!-- 	<div id="timing_link">
+	</div> -->
+	<!-- <video id="clip2" autoplay controls preload="auto">
+		<source src="/home/gvh/Documents/Subjects/Scripts/VisualCrowding_hallway/Human_Hallway_fmri_clips/High_R2L.mp4" type="video/mp4">
+		</video> -->
+	</div>
+	<script type="text/javascript">
+		//Parse the queries 
+		function parseQueries() {
+		    var query = window.location.search.substring(1);
+		    var vars = query.split('&');
+		    var pairs={};
+		    for (var i = 0; i < vars.length; i++) {
+		        var pair = vars[i].split('=');
+		        pairs[pair[0]]=pair[1]
+		    }
+		    return pairs
+		}
+
+		//NOTE TO EMMA: Make sure that when you save the doucment, you include something with the exact time, just in case that matters
+		function getTimingFile(text, name){
+			console.log("HRERE")
+
+			//prepare data for csv
+			var csvContent=[["clip", "onset","end", "duration"]]
+			for (var x=0; x<text.length; x++){
+				var clip=text[x]
+				// var row=[clip.name,clip.start, clip.end, clip.duration]
+				csvContent.push([clip.name,clip.start-document.start, clip.end-document.start, clip.duration])
+			}
+
+			console.log(csvContent)
+			//format the array to standard csv:
+			let csv = "data:text/csv;charset=utf-8,";
+			csvContent.forEach(function(row){
+				let r=row.join(",");
+				csv += r + "\r\n";
+			});
+
+			//make the csv
+			var encodedUri = encodeURI(csv);
+			var link = document.createElement("a");
+			link.setAttribute("href", encodedUri);
+			link.setAttribute("download", name);
+			document.body.appendChild(link); // Required for FF
+
+			link.click(); // automatically trigger download.
+		}
+		
+		function fullscreen(element, on){
+			if (on == false){
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+			        } 
+			    else if (document.msExitFullscreen) {
+		            document.msExitFullscreen();
+			        }
+		        else if (document.mozExitFullScreen) {
+		            document.mozExitFullScreen();
+			        }
+		        else if (document.webkitExitFullScreen) {
+		            document.webkitExitFullscreen();
+			        }
+			} else {
+				if (element.requestFullscreen) {
+		            element.requestFullscreen();
+		        }
+		        else if (element.msRequestFullscreen) {
+		            element.msRequestFullscreen();
+		        }
+		        else if (element.mozRequestFullScreen) {
+		            element.mozRequestFullScreen();
+		        }
+		        else if (element.webkitRequestFullScreen) {
+		            element.webkitRequestFullScreen();
+		        }
+
+			}
+
+		}
+
+
+		function prepVideo(clip, buffer){
+
+
+		}
+
+		if (MediaSource.isTypeSupported('video/mp4; codecs="avc1.64001E"')) {
+		    console.log("mp4 codec supported");
+		}
+
+		var allLinks=video_links.children
+		var clipTimings=[]
+		var linkNum=allLinks.length
+		var clipsPerBlock=2
+		var path="C:\\Users\\BENNETCH.20-3-MERA0359\\Desktop\\VisualCrowding_hallway\\fMRI_Hallway_all_updated_clips\\"
+
+		var videoSources = ["High_L2L", "Low_L2L"]
+
+		var mediaSource = new MediaSource();
+
+
+		mediaSource.addEventListener('sourceopen', function(e) {
+
+
+		    var sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.64001E"');
+		    sourceBuffer.mode = 'sequence';
+
+		    console.log('SourceBuffer mode set to ' + sourceBuffer.mode);
+
+		    sourceBuffer.addEventListener('updateend', function(e) {
+		        console.log('Finished updating buffer');
+		        console.log('New duration is ' + String(mediaSource.duration));
+
+		        if (videoSources.length == 0) {
+		            mediaSource.endOfStream();
+		            video.currentTime = 0;
+		            video.play();
+		            return;
+		        }
+		        
+		        for(var i=0; i<orders.length; i++){
+					console.log("i: " + i)
+					for (var y=0; y<clipsPerBlock; y++){
+						clip=orders[i][y]
+						index=link_list.indexOf(clip)
+							
+					}
+				}
+
+				document.end=performance.now()/1000.0
+				console.log("total duration: ")
+				console.log(document.end-document.start)
+				fullscreen(video, false)
+
+				//automatically download timing files
+				getTimingFile(timings, name)
+
+		        // downloadData(videoSources.pop(), function(arrayBuffer) {
+		        //     console.log('Finished downloading buffer of size ' + String(arrayBuffer.length));
+		        //     console.log('Updating buffer');
+		        //     sourceBuffer.appendBuffer(arrayBuffer);
+		        // });
+
+		        console.log('New duration: ' + String(mediaSource.duration));
+
+		    });
+
+		    downloadData(videoSources.pop(), function(arrayBuffer) {
+		        console.log('Finished downloading buffer of size ' + String(arrayBuffer.length));
+		        console.log('Updating buffer');
+		        sourceBuffer.appendBuffer(arrayBuffer);
+		    });
+
+
+
+		}, false);
+
+		var video = document.querySelector('video');
+		video.src = window.URL.createObjectURL(mediaSource);
+		var pairs=parseQueries();
+
+		//output timing file:
+		if (pairs["test"] == "Y"){
+			today=new Date()
+
+			hh=today.getHours()
+			min=today.getMinutes()
+			sec=today.getSeconds()
+			
+			if(hh<10){
+				hh='0'+hh
+			}
+			if(min < 10){
+				min="0"+min
+			}
+			if(sec < 10){
+				sec="0"+sec
+			}
+
+			time=hh+"h"+min+"m"+sec 
+			var name=pairs["subID"]+"."+pairs["scan-day"]+"."+time+".Timings.csv"
+		} else {
+			var name = pairs["subID"]+"."+pairs["scan-day"]+".VRHallwayfMRITimings.run"+pairs['runNum']+".csv"
+		}
+
+
+
+
+
+
+
+</script>
+</html>

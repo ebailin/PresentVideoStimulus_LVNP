@@ -1,0 +1,327 @@
+<!doctype html5>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="description" content="Displays the first run (run 'A') for the human hallway fMRI study"/>
+	<meta name="author" content="Emma Bailin" />
+	<meta name="creation date" content="July 18, 2019"/>
+	<meta name="modified" content="July 18, 2019"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<style>
+	video#playlist{
+		/*visibility: hidden;*/
+/*	position: fixed; right:0; bottom:0;
+	min-width: 100%; min-height:100%;
+	width: auto; height:auto; z-index: -100;*/
+	width:100%; height:auto; z-index: -100;
+}
+
+</style>
+<script src="jquery-3.4.1.min.js"></script>
+</head>
+<div id="hidden_info">
+	
+</div>
+<div id="player" class="player">
+	<video id="playlist" preload="auto" autofocus >
+		<source src="C:/Users/BENNETCH.20-3-MERA0359/Desktop/VisualCrowding_hallway\fMRI_Hallway_all_updated_clips\BLANK_HALLWAY.mp4" type="video/mp4">
+			<!-- <source src="/home/gvh/Documents/Subjects/Scripts/VisualCrowding_hallway/Human_Hallway_fmri_clips/High_R2L.mp4" type="video/mp4" name="clip2"> -->
+				<!-- <source src=/home/gvh/Documents/Subjects/Scripts/VisualCrowding_hallway/Human_Hallway_fmri_clips/High_R2L.mp4 type="video/mp4" name="clip3"> -->
+				</video>
+				<figcaption id="video_links">
+					<a class="" href="High_L2L.mp4" name="High_L2L" rel="preload" as="video"></a>
+					<a class="" href="High_L2R.mp4" name="High_L2R" rel="preload" as="video"></a>
+					<a class="" href="High_R2L.mp4" name="High_R2L" rel="preload" as="video"></a>
+					<a class="" href="High_R2R.mp4" name="High_R2R" rel="preload" as="video"></a>
+					<a class="" href="Low_L2L.mp4" name="Low_L2L" rel="preload" as="video"></a>
+					<a class="" href="Low_L2R.mp4" name="Low_L2R" rel="preload" as="video"></a>
+					<a class="" href="Low_R2L.mp4" name="Low_R2L" rel="preload" as="video"></a>
+					<a class="" href="Low_R2R.mp4" name="Low_R2R" rel="preload" as="video"></a>
+					<a class="" href="Medium_L2L.mp4" name="Medium_L2L" rel="preload" as="video"></a>
+					<a class="" href="Medium_L2R.mp4" name="Medium_L2R" rel="preload" as="video"></a>
+					<a class="" href="Medium_R2L.mp4" name="Medium_R2L" rel="preload" as="video"></a>
+					<a class="" href="Medium_R2R.mp4" name="Medium_R2R" rel="preload" as="video"></a>
+					<a class="" href="NoPrinc_High1.mp4" name="NoPrinc_High1" rel="preload" as="video"></a>
+					<a class="" href="NoPrinc_High2.mp4" name="NoPrinc_High2" rel="preload" as="video"></a>
+					<a class="" href="NoPrinc_High3.mp4" name="NoPrinc_High3" rel="preload" as="video"></a>
+					<a class="" href="NoPrinc_High4.mp4" name="NoPrinc_High4" rel="preload" as="video"></a>
+					<a class="" href="BLANK_HALLWAY.mp4" name="BLANK_HALLWAY" rel="preload" as="video"></a>
+
+		<!-- <a class="" href="..\fMRI_Hallway_all_updated_clips\High_L2L.mp4" name="High_L2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\High_L2R.mp4" name="High_L2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\High_R2L.mp4" name="High_R2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\High_R2R.mp4" name="High_R2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Low_L2L.mp4" name="Low_L2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Low_L2R.mp4" name="Low_L2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Low_R2L.mp4" name="Low_R2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Low_R2R.mp4" name="Low_R2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Medium_L2L.mp4" name="Medium_L2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Medium_L2R.mp4" name="Medium_L2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Medium_R2L.mp4" name="Medium_R2L"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\Medium_R2R.mp4" name="Medium_R2R"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\NoPrinc_High1.mp4" name="NoPrinc_High1"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\NoPrinc_High2.mp4" name="NoPrinc_High2"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\NoPrinc_High3.mp4" name="NoPrinc_High3"></a>
+		<a class="" href="..\fMRI_Hallway_all_updated_clips\NoPrinc_High4.mp4" name="NoPrinc_High4"></a> -->
+	</figcaption>
+<!-- 	<div id="timing_link">
+	</div> -->
+	<!-- <video id="clip2" autoplay controls preload="auto">
+		<source src="/home/gvh/Documents/Subjects/Scripts/VisualCrowding_hallway/Human_Hallway_fmri_clips/High_R2L.mp4" type="video/mp4">
+		</video> -->
+	</div>
+	<script type="text/javascript">
+		//Parse the queries 
+		function parseQueries() {
+		    var query = window.location.search.substring(1);
+		    var vars = query.split('&');
+		    var pairs={};
+		    for (var i = 0; i < vars.length; i++) {
+		        var pair = vars[i].split('=');
+		        pairs[pair[0]]=pair[1]
+		    }
+		    return pairs
+		}
+
+		//NOTE TO EMMA: Make sure that when you save the doucment, you include something with the exact time, just in case that matters
+		function getTimingFile(text, name){
+			console.log("HRERE")
+
+			//prepare data for csv
+			var csvContent=[["clip", "onset","end", "duration"]]
+			for (var x=0; x<text.length; x++){
+				var clip=text[x]
+				// var row=[clip.name,clip.start, clip.end, clip.duration]
+				csvContent.push([clip.name,clip.start-document.start, clip.end-document.start, clip.duration])
+			}
+
+			console.log(csvContent)
+			//format the array to standard csv:
+			let csv = "data:text/csv;charset=utf-8,";
+			csvContent.forEach(function(row){
+				let r=row.join(",");
+				csv += r + "\r\n";
+			});
+
+			//make the csv
+			var encodedUri = encodeURI(csv);
+			var link = document.createElement("a");
+			link.setAttribute("href", encodedUri);
+			link.setAttribute("download", name);
+			document.body.appendChild(link); // Required for FF
+
+			link.click(); // automatically trigger download.
+		}
+		
+		function fullscreen(element, on){
+			if (on == false){
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+			        } 
+			    else if (document.msExitFullscreen) {
+		            document.msExitFullscreen();
+			        }
+		        else if (document.mozExitFullScreen) {
+		            document.mozExitFullScreen();
+			        }
+		        else if (document.webkitExitFullScreen) {
+		            document.webkitExitFullscreen();
+			        }
+			} else {
+				if (element.requestFullscreen) {
+		            element.requestFullscreen();
+		        }
+		        else if (element.msRequestFullscreen) {
+		            element.msRequestFullscreen();
+		        }
+		        else if (element.mozRequestFullScreen) {
+		            element.mozRequestFullScreen();
+		        }
+		        else if (element.webkitRequestFullScreen) {
+		            element.webkitRequestFullScreen();
+		        }
+
+			}
+
+		}
+
+		function playVid(index){
+			return new Promise(function(resolve, reject){
+				console.log("in playVid")
+				video_links.children[index].classList.add("currentvid")
+				console.log("ADDED "+video_links.children[index])
+
+				source[0].src =path + allLinks[index].name + ".mp4"
+				video.load()
+
+				video.onloadeddata=function() {
+				// video.oncanplaythrough=function(){
+					console.log("loaded!")
+					allLinks[index].start=performance.now()/1000.0
+					console.log("start: " + allLinks[index].start)
+					video.play()
+					video.onended=function(){
+						allLinks[index].end=performance.now()/1000.0;
+						allLinks[index].duration=allLinks[index].end-allLinks[index].start
+						console.log("clip duration: " + allLinks[index].duration)
+						allLinks[index].classList.remove("currentvid");
+						console.log("REMOVED "+video_links.children[index])
+						timings.push(allLinks[index])
+						console.log(allLinks[index].duration)
+						resolve(allLinks[index])
+					}
+				}
+			})
+
+			// video.addEventListener('loadeddata', function() {
+			// 	allLinks[index].start=performance.now()/1000.0
+			// 	video.play()
+			// })
+
+			// video.onended= function () {
+			// 	allLinks[index].end=performance.now()/1000.0;
+			// 	allLinks[index].duration=allLinks[index].end-allLinks[index].start
+			// 	allLinks[index].classList.remove("currentvid");
+			// 	timings.push(allLinks[index])
+			// 	console.log(allLinks[index].duration)
+			// }
+
+			// video.addEventListener('ended', function () {
+			// 	allLinks[index].end=performance.now()/1000.0;
+			// 	allLinks[index].duration=allLinks[index].end-allLinks[index].start
+			// 	allLinks[index].classList.remove("currentvid");
+			// 	timings.push(allLinks[index])
+			// 	console.log(allLinks[index].duration)
+			// 	return
+			// })
+		}
+
+		var endBlock = false;
+		var endRun = false;
+
+		// var orders=[["BLANK_HALLWAY", "High_L2R", "Medium_L2L", "NoPrinc_High2", "Low_R2L"], ["BLANK_HALLWAY", "NoPrinc_High3", "Low_R2R", "High_R2L", "Medium_R2R"], ["BLANK_HALLWAY", "Medium_L2L", "NoPrinc_High4", "Low_L2L", "High_L2L"], ["BLANK_HALLWAY", "Low_R2L", "High_L2R", "Medium_R2L", "NoPrinc_High1"], ["BLANK_HALLWAY","High_R2L", "Medium_R2R", "NoPrinc_High2", "Low_L2R"], ["BLANK_HALLWAY", "High_R2R", "Medium_L2R", "Low_L2L", "NoPrinc_High1"]];
+		var orders=[["High_L2L", "Low_L2L"]]//,["NoPrinc_High3", "Medium_R2L"]]
+
+		var timings=[];
+		var player = document.getElementById("player");
+		video = player.getElementsByTagName("video")[0], 
+		video_links= player.getElementsByTagName("figcaption")[0],
+		source = video.getElementsByTagName("source"),
+		link_list=[],
+		// path='/home/gvh/Documents/Subjects/Scripts/VisualCrowding_hallway/Human_Hallway_fmri_clips/',
+		path="C:\\Users\\BENNETCH.20-3-MERA0359\\Desktop\\VisualCrowding_hallway\\fMRI_Hallway_all_updated_clips\\",
+		// clipsPerBlock=5, //number of clips in a block
+		clipsPerBlock=2,
+		// path="",
+		currentVid=0,
+		allLinks=video_links.children,
+		clipTimings=[],
+		linkNum=allLinks.length;
+		var count=0;
+		var pairs=parseQueries();
+
+		//initialize array of clips
+		//Needed because allLinks is
+		for (var i=0;i<linkNum; i++){
+				// console.log("i: "+i)
+				// var filename=allLinks[i].name;
+				// var filename=allLinks[i].href;
+				// var filename=path+allLinks[i].name;
+				// console.log("filename: ", filename);
+				// link_list[i] = filename;
+				link_list[i] = allLinks[i].name;
+
+			};
+
+		// video.removeAttribute("controls");
+		//make sure that the player is always in focus (important for the playing and the scanner signals) --esb, July 18,2019:
+		$('#playlist').blur(function(e){
+			console.log("player out!")
+			setTimeout(function(){
+				$("#playlist").focus();
+			}, 20);
+		});
+
+		// Only start when everything is loaded!:
+		$(document).ready(function(e){ 
+			console.log("here")
+			// var i=0
+			$(document).keypress( async function(e){
+				for(var i=0; i<orders.length; i++){
+				// while(i<orders.length){
+					console.log("i: " + i)
+					for (var y=0; y<clipsPerBlock; y++){
+					// while(y<clipsPerBlock){
+						console.log("y: "+y)
+						clip=orders[i][y]
+						index=link_list.indexOf(clip)
+						console.log(clip)
+						console.log(index)
+						// e.preventDefault()
+
+						if (i==0 && y==0){
+							if ((e.keyCode == 222) || (e.keyCode == 39) || (e.keyCode == 34)){
+								fullscreen(video, true)
+								document.start=performance.now()/1000.0
+								clip=await playVid(index)
+							} else {
+								return
+							}
+						} else {
+							if (e.keyCode==27){
+								video.pause()
+								return
+							} else {
+								e.preventDefault() //ignore the keypress UNLESS it's the escape key
+
+							}
+
+							clip=await playVid(index)
+						}
+						}
+						if(i==orders.length-1 && y==clipsPerBlock){
+							document.end=performance.now()/1000.0
+							console.log("total duration: ")
+							console.log(document.end-document.start)
+							fullscreen(video, false)
+
+							//automatically download timing files
+							getTimingFile(timings, name)
+							
+						}
+					}
+				})
+			})
+
+		//output timing file:
+		if (pairs["test"] == "Y"){
+			today=new Date()
+
+			hh=today.getHours()
+			min=today.getMinutes()
+			sec=today.getSeconds()
+			
+			if(hh<10){
+				hh='0'+hh
+			}
+			if(min < 10){
+				min="0"+min
+			}
+			if(sec < 10){
+				sec="0"+sec
+			}
+
+			time=hh+"h"+min+"m"+sec 
+			var name=pairs["subID"]+"."+pairs["scan-day"]+"."+time+".Timings.csv"
+		} else {
+			var name = pairs["subID"]+"."+pairs["scan-day"]+".VRHallwayfMRITimings.run"+pairs['runNum']+".csv"
+		}
+
+
+
+
+
+
+
+</script>
+</html>

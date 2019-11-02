@@ -1,0 +1,2 @@
+FLASK_APP=hallway_fmri.py
+FLASK_DEBUG=True

@@ -1,0 +1,208 @@
+<!doctype html5>
+<html>
+
+<meta charset="utf-8"/>
+<meta name="description" content="Displays the stimuli for the humna hallway fMRI study"/>
+<meta name="author" content="Emma Bailin" />
+<meta name="creation date" content="July 18, 2019"/>
+<meta name="modified" content="July 18, 2019"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script src="jquery-3.4.1.min.js"></script>
+<style>
+video#clips{
+	visibility: hidden;
+	/*position: fixed; right:0; bottom:0;
+	min-width: 100%; min-height:100%;
+	width: auto; height:auto; z-index: -100;*/
+}
+</style>
+<form method="get" action="hallway_fmri_stim_runA.html"> 
+	<span>
+	<h3> Is this a test?
+	<input type="radio" name="test" value="Y" onmousedown="testingProtocol(this)">yes!
+	<input type="radio" name="test" value="N" checked  onmousedown="testingProtocol(this)">no
+	</span>
+	</h3>
+
+	<fieldset class="subject-info" id="sub-info">
+		<legend><b>Subject Information</b></legend>
+		<div class="sub_info" id="sub_info" >
+			<span>
+				Group: 
+				<select id="groups" name="groups" onchange="setValues(this)">
+					<option value="" disabled selected>--</option>
+					<option value="c">CVI</option>
+					<option value="o">OVI</option>
+					<option value="x">Control</option>
+				</select> 
+			</span>
+			<br>
+			<!-- <span class="subject-id"> -->
+			<div class="subect-id">
+				<span>
+					Subject Sex: 
+					<input type="radio" name="sex" id="sex" value="M" checked onmousedown="setValues(this)">male
+					<input type="radio" name="sex" id="sex" value="F" onmousedown="setValues(this)">female
+				</span>
+				<br>
+				<span>Subject Initials: <input type="text" name="initials" id="initials" maxlength="2" minlength="1" onchange="setValues(this)"></span>
+				<br>
+				<span>Subject DOB: <input type="date" id="bday" name="dob" onchange="setValues(this)"></span>
+			</div>
+			<br>
+			<!-- <button type="button" name="save" id="saveID">save</button> -->
+		</div>
+		<div class="breathing"><br><div>
+		<div class="confirm">
+		<span class="edit" id="edit_id">
+			Subject ID: <input type="text" name="subID" id="subID" readonly="readonly" pattern=".{2,}" onsubmit="return checkCompleted(this)">
+			<button type="button" name="edit1" id="id_edit" onclick="enableArea(this)">edit</button>
+		</span>
+		<br>
+		<span class="edit" id="edit_date">
+			Scan Date: <input type="date" id="scan-day"  readonly="readonly" required name="scan-day">
+			<button type="button" name="edit2" id="day_edit" onclick="enableArea(this)">edit</button>
+		</span>
+		</div>
+	</fieldset>
+	<div class="breathing"><br><div>
+	<fieldset  id="runs-id">
+		<legend><b>Runs</b></legend>
+		<div id="runs">
+			<span> Number: <input type="number" id="runNum" name="runNum" required placeholder="--"></span>
+			<br>
+			<span>
+				Version:
+					<select id="run_options" name="run_options" required>
+						<option value="" disabled selected>--</option>
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="TEST" disabled>Test</option>
+					</select>
+			</span>
+			<br>
+			<button type="submit" id="go" onclick="return submitAll()">GO!</button>
+			<br>
+			<p><i>[Note: Pressing "go" just loads the run. The stimulus will not start until the scanner sends a signal]</i></p>
+		</div>
+	</fieldset>
+</form>
+
+<script type="text/javascript">
+	var subjid=[]
+	subjid.length=4
+	var initials=document.getElementById("initials")
+
+	//set the scan date automatically
+	window.onload=function(){
+		document.getElementById("scan-day").valueAsDate=new Date()
+		subjid[1]=document.getElementById("sex").value
+		document.getElementById('subID').value=subjid.join("")
+		// document.getElementById('subID').value=document.getElementById("sex").value
+	}
+
+	function setValues(toBe){
+		// console.log(variable)
+		var change=document.getElementById('subID')
+		console.log(change)
+		console.log(toBe.id)
+
+		switch(toBe.id){
+			case "groups":
+				console.log("groups")
+				subjid[0]=toBe.value.toString()
+				break;
+			case "sex":
+				console.log("sex")
+				subjid[1]=toBe.value.toString()
+				break;
+			case "initials":
+				subjid[2]=toBe.value.toString().toUpperCase()
+				break;
+			case "bday":
+				var x=new Date(toBe.value)
+				var month=x.getMonth()+1
+				var year=x.getFullYear().toString().substr(-2)
+				if (month < 10){
+					month="0".concat(month)
+				}
+				subjid[3]="_".concat(month, year)
+				break;	
+		}
+
+		console.log(subjid)
+		change.value=subjid.join("")
+	}
+
+	function enableArea(x){
+		console.log(x.id)
+		switch(x.id){
+			case "id_edit":
+				var element=document.getElementById("subID")
+				break;
+			case "day_edit":
+				var element=document.getElementById("scan-day")
+		}
+
+		element.readOnly = element.readOnly ? false: true; //toggle visibility
+	}
+
+	function checkCompleted(x){
+		if (x.value.length <= 1){
+			console.log("BAD")
+			alert("The subject ID is not complete! Either fill in the top part of the form or edit the id directly!")
+			return false;
+		} else {
+			sessionStorage.subj=x.value
+		}
+	}
+
+	function testingProtocol(answer){
+		var fieldsetSub=document.getElementById("sub-info")
+
+		if (answer.value=="Y"){
+			fieldsetSub.readOnly=true
+			document.getElementById("subID").value="TEST_0000"
+			document.getElementById("runNum").disabled=true
+			document.getElementById("run_options").value="TEST"
+		} else {
+			fieldsetSub.disabled=false
+			document.getElementById("runNum").disabled=false
+		}
+	}
+	
+	function submitAll(){
+		var kvpairs = [];
+		var form = document.getElementsByTagName("form")
+		var id=document.getElementById("subID")
+		var date=document.getElementById("scan-day")
+
+
+		//first check that the subject ID is done:
+		if (id.value.length <= 1){
+			console.log("BAD")
+			alert("The subject ID is not complete! Either fill in the top part of the form or edit the id directly!")
+			return false;
+		} 
+		if(document.getElementById("test") == "N"){
+			if(isNaN(document.getElementById("runNum"))){
+				alert("The run number is not provided. It is required")
+				return false;
+			}
+		}else{
+			var fieldsetSub=document.getElementById("sub-info")
+			fieldsetSub.disabled=false
+			id.disabled=false
+			date.disabled=false
+		}
+
+
+		for ( var i = 0; i < form.elements.length; i++ ) {
+		   var e = form.elements[i];
+		   kvpairs.push(encodeURIComponent(e.name) + "=" + encodeURIComponent(e.value));
+		}
+		var queryString = kvpairs.join("&");
+	}
+
+</script>
+</html>
