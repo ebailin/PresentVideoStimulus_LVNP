@@ -43,20 +43,30 @@ Besides the requirements listed above, the csv file from the trial must be easil
  2. Open the terminal*
  3. Navigate to the Desktop.
  4. Type in the following:
+    [FOR UNIX]
     ```console
     COMPUTER@USER:~/Desktop $ python3 -m venv fmri_hallway
     COMPUTER@USER:~/Desktop $ cd fmri_hallway
     COMPUTER@USER:~/Desktop/fmri_hallway $ source bin/activate
+    ```
+    [FOR WINDOWS]
+    ```console
+    COMPUTER@USER:\Desktop $ virtualenv fmri_hallway
+    COMPUTER@USER:\Desktop $ cd fmri_hallway
+    COMPUTER@USER:\Desktop\fmri_hallway $ Scripts\activate
+    ```
+    [FOR BOTH]
+    ```console
     COMPUTER@USER:~/Desktop/fmri_hallway $ mkdir app
     COMPUTER@USER:~/Desktop/fmri_hallway/ $ cd app
     (fmri_hallway) COMPUTER@USER:~/Desktop/fmri_hallway/app $ git clone https://github.com/ebailin/PresentVideoStimulus_LVNP.git
     (fmri_hallway) COMPUTER@USER:~/Desktop/fmri_hallway/app $ pip install -r requirements.txt  
     ```
- 5. If you did step 2-4, skip this step.
+ 5. If you did step 4, skip this step.
  
     ```console
     COMPUTER@USER:~/Desktop $ cd fmri_hallway
-    COMPUTER@USER:~/Desktop/fmri_hallway $ source bin/activate
+    COMPUTER@USER:~/Desktop/fmri_hallway $ source bin/activate #for UNIX, Scripts\activate for Windows
     (fmri_hallway) COMPUTER@USER:~/Desktop/fmri_hallway/ $ cd app
     ```
 
@@ -64,26 +74,17 @@ Besides the requirements listed above, the csv file from the trial must be easil
 
      ```console
      (fmri_hallway) COMPUTER@USER:~/Desktop/fmri_hallway/app $ flask
-         * Serving Flask app "hallway_fmri.py" (lazy loading)
-         * Environment: production
-           WARNING: This is a development server. Do not use it in a production deployment.
-           Use a production WSGI server instead.
-         * Debug mode: on
-         * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-         * Restarting with stat
         [2019-11-02 16:07:49,995] INFO in __init__: startup
         hallway is running
-         * Debugger is active!
-         * Debugger PIN: 320-646-370
-        [2019-11-02 16:07:50,339] INFO in __init__: startup
-        hallway is running
+        Serving on http://DESKTOP-KGTPVBU:8080
+        Serving on http://DESKTOP-KGTPVBU:8080
      ```
 
-7. Open a new window on Chrome (**not** Safari or Firefox. Neither will play the videos accurately!) and go to [htttp://127.0.0.1:5000/].
+7. Open a new window on Chrome (**not** Safari or Firefox. Neither will play the videos accurately!) and go to [http://localhost:8080/].
  
-8. Test that the videos play correctly by selecting "yes" to "Is this a test? ". **If the fields do not autopopulate and you cannot select "Test" in the dropdown menu, you need to switch to Chrome**. Hit "Go". When the window with a freeze-frame video loads, hit the quotation key (the one next to the right shift button). The picture should go into fullscreen and then four videos should play in sequence. Try hitting any key *except* for ESC. When the fourth video ends, the screen should go out of fullscreen and an file should automatically download called "TEST_0000_DATETIMEOFRUN.csv". Open that file and confirm that the duration of each clip is no more than .10 seconds from the expected duration (for the current VCHallway protocol, it should be 8.00 seconds). If you hit any key during any clip, confirm that there is a time in the "response" column for that clip. 
+8. Test that the videos play correctly by selecting "yes" to "Is this a test? ". **If the fields do not autopopulate and you cannot select "Test" in the dropdown menu, you need to switch to Chrome**. Hit "Go". When the window with a freeze-frame video loads, hit the quotation key (the one next to the right shift button). The picture should go into fullscreen and then four videos should play in sequence. Try hitting any key *except* for ESC. When the fourth video ends, the screen should go out of fullscreen and an file should automatically download called "TEST_0000_DATETIMEOFRUN.Timings.csv". Open that file and confirm that the duration of each clip is no more than .10 seconds from the expected duration (for the current VCHallway protocol, it should be 8.00 seconds). If you hit any key during any clip, confirm that there is a time in the "response" column for that clip. 
 
-9. If all things go as planned, hit the back button on the browser to return to the form. If something has not worked, do not try to debug unless you're sure you know what you're doing! If you're at all unsure, contact Emma. If you can't find/reach Emma, go to Chris. If you don't have a clue who those people are, find someone else who knows how to debug Python 3.6, Flask, HTML, and/or Javascript. No matter what, *make a copy of the whole folder and edit that, **NOT** the original, _even_ if you're using git! Follow current lab procedures on replacing scripts if you solve the problem.*
+9. If all things go as planned, hit the back button on the browser to return to the form. If something has not worked, do not try to debug unless you're sure you know what you're doing! If you're at all unsure, contact Emma. If you can't find/reach Emma, go to Chris. If you don't have a clue who those people are, find someone else who knows how to debug. No matter what, *make a copy of the whole folder and edit that, **NOT** the original, _even_ if you're using git! Follow current lab procedures on replacing scripts if you solve the problem.*
 
 10. Fill in the relevant subject information on the form. The "Subject Initials" field should autopopulate as you fill in the top boxes. If it doesn't, or for some reason the code is incorrect, hit the "edit" button to unlock the field and correct it. The "Scan Date" should be the current date. If you have a very good reason to change this, unlock the field using the edit button.
 
@@ -94,8 +95,5 @@ Besides the requirements listed above, the csv file from the trial must be easil
 13. If you hit the back key, the subject information section should still be filled out and the Number should have incremented (though the number incrementing seems to have a random bug?--esb, Aug8,2019). Change what needs to be changed and hit go again. Repeat step 12 as needed.
 
 14. At the end of the scanning session, copy all of the csvs onto the lab flashdrive. Be sure that the MRI technician has also copied all of the scans to the drive. Return to the lab and process according to the procedures documented in Emma's Lab Log. 
-
-*If you're using a window computer, look up how to create a virtual python environment and then clone the repo and install pip.
-
 
 
