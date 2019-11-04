@@ -1,93 +1,115 @@
 {% from "_form_macros.html" import render_field %}
-{% extends 'bootstrap/base.html' %}
-<!doctype html5>
+<!DOCTYPE html>
 <html>
+<head>
 <meta charset="utf-8"/>
+<meta pageEncoding="utf-8"/>
 <meta name="description" content="Displays the stimuli for the humna hallway fMRI study"/>
 <meta name="author" content="Emma Bailin" />
 <meta name="creation date" content="July 18, 2019"/>
 <meta name="modified" content="July 18, 2019"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 <!-- <script src="jquery-3.4.1.min.js"></script> -->
 <style>
-video#clips{
-	visibility: hidden;
-	/*position: fixed; right:0; bottom:0;
-	min-width: 100%; min-height:100%;
-	width: auto; height:auto; z-index: -100;*/
+div#confirm{
+	border: solid red;
+	background-color: pink;
 }
+
+div#submit{
+	visibility: hidden
+}
+
 </style>
-{% block content %}
-<form method="get" action=""> 
-	<span>
+<form action="" method="get" charset="utf-8" encoding="utf-8"> 
+	<!-- {{ form.hidden_tag() }} -->
+	{{ form.reset_Form(type="button", onclick="resetForm()")}}
+	<!-- <button type="button" id="reset_form" onclick="resetForm()">RESET FORM</button> -->
+	<div class="breathing"><br></div>
+	<!-- <span> -->
 	<h3> Is this a test?
-	{% for check in form.test %}
-		{{ check.label }}
-		{{ check(onmousedown="testingProtocol(this)") }}
+	{% for t in form.test %}
+		{{ t(onmousedown="testingProtocol(this)") }} {{ t.label }}
 	{% endfor %}
+	<!-- <input type="radio" name="test" value="Y" onmousedown="testingProtocol(this)">yes! -->
+	<!-- <input type="radio" name="test" value="N" checked  onmousedown="testingProtocol(this)">no -->
+	<!-- </span> -->
 	</h3>
-	</span>
 
 	<fieldset class="subject-info" id="sub-info">
 		<legend><b>Subject Information</b></legend>
 		<div class="sub_info" id="sub_info" >
 			<span>
-				Group:
-				{{ form.groups(onchange='setValues(this)') }}
+				Group: {{ form.groups(onchange="setValues(this)", placeholder="--")}}
 			</span>
 			<br>
 			<!-- <span class="subject-id"> -->
 			<div class="subect-id">
 				<span>
-					Subject Sex:
-					{% for check in form.sex %}
-						{{ check.label }} 
-						{{ check(onmousedown='setValues(this)', id="sex") }}
+					Subject Sex: 
+					<!-- {{ form.sex(onmousedown="setValues(this)") }} -->
+					{% for s in form.sex %}
+						{{ s(onmousedown="setValues(this)") }} {{ s.label }}
 					{% endfor %}
+					<!-- <input type="radio" name="sex" id="sex" value="M" checked onmousedown="setValues(this)">male
+					<input type="radio" name="sex" id="sex" value="F" onmousedown="setValues(this)">female -->
 				</span>
 				<br>
-				<span>Subject Initials: 
-				{{ form.initials(onchange="setValues(this)", maxlength="2", minlength="1") }}
-				</span>
+				<span>Subject Initials:
+				{{ form.initials(onchange="setValues(this)", maxlength="2") }}</span> 
+				<!-- <input type="text" name="initials" id="initials" maxlength="2" minlength="1" onchange="setValues(this)"></span> -->
 				<br>
-				<span>Subject DOB: 
-				{{ form.dob(onchange="setValues(this)") }}
+				<span>Subject DOB: {{ form.dob(onchange="setValues(this)")}}
 				</span>
+				<!-- <input type="date" id="bday" name="dob" onchange="setValues(this)"></span> -->
 			</div>
 			<br>
 			<!-- <button type="button" name="save" id="saveID">save</button> -->
 		</div>
-		<div class="breathing"><br><div>
+		<div class="breathing"><br></div>
 		<div class="confirm">
 		<span class="edit" id="edit_id">
-			Subject ID: <input type="text" name="subID" id="subID" readonly="readonly" pattern=".{2,}" onsubmit="return checkCompleted(this)">
-			<button type="button" name="edit1" id="id_edit" onclick="enableArea(this)">edit</button>
+			Subject ID: 
+			{{ form.subid( readonly="readonly")}}
+			<!-- <input type="text" name="subID" id="subID" readonly="readonly" pattern=".{2,}" onsubmit="return checkCompleted(this)"> -->
+			{{ form.editSubId(type="button", onclick="enableArea(this)")}}
+			<!-- <button type="button" name="edit1" id="id_edit" onclick="enableArea(this)">edit</button> -->
 		</span>
 		<br>
 		<span class="edit" id="edit_date">
-			Scan Date: <input type="date" id="scan-day"  readonly="readonly" required name="scan-day">
-			<button type="button" name="edit2" id="day_edit" onclick="enableArea(this)">edit</button>
+			Scan Date:
+			{{ form.scanDate(readonly="readonly")}} 
+			<!-- <input type="date" id="scan-day"  readonly="readonly" required name="scan-day"> -->
+			{{ form.editDay(type="button", onclick="enableArea(this)")}}
+			<!-- <button type="button" name="edit2" id="day_edit" onclick="enableArea(this)">edit</button> -->
 		</span>
 		</div>
 	</fieldset>
-	<div class="breathing"><br><div>
+	<div class="breathing"><br></div>
+	<div class="confirm" id="confirm" hidden></div>
 	<fieldset  id="runs-id">
 		<legend><b>Runs</b></legend>
 		<div id="runs">
-			<span> Number: <input type="number" id="runNum" name="runNum" required placeholder="--"></span>
+			<span> 
+			Number: {{ form.runNum(onsubmit="checkRunNum()", min=0, placeholder="--", required="true")}}
+			<!-- Number: <input type="number" id="runNum" name="runNum" onsubmit="checkRunNum()" required placeholder=></span> -->
 			<br>
 			<span>
 				Version:
-					<select id="run_options" name="run_options" required>
-						<option value="" disabled selected>--</option>
+				{{ form.version(placeholder="--") }}
+					<!-- <select id="run_options" name="run_options" required>
+						<option value="" disabled selected></option>
 						<option value="A">A</option>
 						<option value="B">B</option>
 						<option value="TEST" disabled>Test</option>
-					</select>
+					</select> -->
 			</span>
 			<br>
 			<!-- <button type="submit" id="go" onclick="return submitAll()">GO!</button> -->
-			{{ form.go(onclick="return submitAll()") }}
+			{{ form.go(onclick="return submitAll()")}}
+			{{ form.submit(type="hidden")}}
+			<!-- {{ form.go }} -->
 			<br>
 			<p><i>[Note: Pressing "go" just loads the run. The stimulus will not start until the scanner sends a signal]</i></p>
 		</div>
@@ -98,17 +120,71 @@ video#clips{
 	var subjid=[]
 	subjid.length=4
 	var initials=document.getElementById("initials")
+	var confirm=document.getElementById("confirm")
+	var inputs=document.getElementById('sub_info').querySelectorAll(['select', 'input'])
+	// var newCookie=getCookie("new")
+	// sessionStorage.clear()
+
+	/* Check if the form has already been submitted, and this is the second/multiple time the runs have occured*/
+	if ((getCookie("new") == "False")|| (getCookie("new")==null)){
+		for(var i=0; i<inputs.length; i++){
+			inputs[i].disabled=true
+		}
+		confirm.hidden=false
+		confirm.innerHTML="<h3><b>The run number below was taken from the last session. If you don't increment it yourself, it will be incremented automatically.</b></h3>"
+
+	} else{
+	//in the unlikely case that the inputs are still disabled
+		for(var i=0; i<inputs.length; i++){
+			inputs[i].disabled=false
+		}
+		confirm.hidden=true
+		setCookie("new", "False")
+	}
+
+	/*if (sessionStorage.length>0){ //then it's not the first time we've run this script
+		document.getElementById("run_options").value="" //be sure that they have to put in a new run type
+
+		for(var i=0; i<inputs.length; i++){
+			inputs[i].disabled=true
+		}
+
+		if ((sessionStorage.getItem("runNum")!=null) &&sessionStorage.subjid.length>1){
+			var sub=document.getElementById("subID")
+			sub.value=sessionStorage.subjid
+		}
+
+		if((sessionStorage.getItem("runNum")!=null) && (sessionStorage.runNum.length>0)){
+			var runNum=document.getElementById("runNum")
+			runNum.value=sessionStorage.runNum
+		}
+
+		if((sessionStorage.getItem("test")!=null) &&sessionStorage.test.length>0){
+			var test=document.getElementsByName("test")[0]
+			test.checked=true
+			test.dispatchEvent(new Event("mousedown"))
+
+		}else{
+			confirm.hidden=false
+			confirm.innerHTML="<h3><b>The run number below was taken from the last session. If you don't increment it yourself, it will be incremented automatically.</b></h3>"
+		}
+
+	} else{
+		//in the unlikely case that the inputs are still disabled
+		for(var i=0; i<inputs.length; i++){
+			inputs[i].disabled=false
+		}
+		confirm.hidden=true
+
+
+	}*/
 
 	//set the scan date automatically
 	window.onload=function(){
 		document.getElementById("scan-day").valueAsDate=new Date()
-		// subjid[1]=document.getElementById("sex").value
-		document.getElementById('subID').value=subjid.join("")
-		// document.getElementById('subID').value=document.getElementById("sex").value
 	}
 
 	function setValues(toBe){
-		// console.log(variable)
 		var change=document.getElementById('subID')
 		console.log(change)
 		console.log(toBe.id)
@@ -136,6 +212,10 @@ video#clips{
 				break;	
 		}
 
+		if(toBe.name=="sex"){
+			subjid[1]=toBe.value.toString()
+		}
+
 		console.log(subjid)
 		change.value=subjid.join("")
 	}
@@ -159,7 +239,8 @@ video#clips{
 			alert("The subject ID is not complete! Either fill in the top part of the form or edit the id directly!")
 			return false;
 		} else {
-			sessionStorage.subj=x.value
+			setCookie("subjid", x.value)
+			// sessionStorage.subj=x.value
 		}
 	}
 
@@ -167,19 +248,31 @@ video#clips{
 		var fieldsetSub=document.getElementById("sub-info")
 
 		if (answer.value=="Y"){
-			fieldsetSub.readOnly=true
+			for(var i=0; i<inputs.length; i++){
+				inputs[i].disabled=true
+			}
 			document.getElementById("subID").value="TEST_0000"
 			document.getElementById("runNum").disabled=true
 			document.getElementById("run_options").value="TEST"
+			setCookie("test", "Y")
+			// sessionStorage.test="Y"
+			confirm.hidden=true
 		} else {
-			fieldsetSub.disabled=false
 			document.getElementById("runNum").disabled=false
+			document.getElementById("subID").value=""
+			document.getElementById("run_options").value=""
+			document.getElementById("run_options")[3].disabled= true
+			for(var i=0; i<inputs.length; i++){
+				inputs[i].disabled=false
+			}
+			confirm.hidden=true
+			setCookie("test", "N")
 		}
 	}
 	
 	function submitAll(){
+		console.log("submitted")
 		var kvpairs = [];
-		var form = document.getElementsByTagName("form")
 		var id=document.getElementById("subID")
 		var date=document.getElementById("scan-day")
 
@@ -203,14 +296,81 @@ video#clips{
 		}
 
 
-		// for ( var i = 0; i < form.elements.length; i++ ) {
-		//    var e = form.elements[i];
-		//    kvpairs.push(encodeURIComponent(e.name) + "=" + encodeURIComponent(e.value));
-		// }
-		// var queryString = kvpairs.join("&");
-		return true
+		setCookie("subjid", document.getElementById("subID").value)
+		// sessionStorage.setItem('subjid', document.getElementById("subID").value)
+
+		document.getElementById("submit").dispatchEvent(new Event("submit"))
+		}
+
+	function checkRunNum(){
+		console.log("checkRunNum")
+		// if(sessionStorage.length>0){
+		if(getCookie("runNum") != null){
+			var num=getCookie("runNum")
+			// var num=sessionStorage.runNum
+			var newNum=this.value
+
+			if((newNum-num)==0){
+				newNum.value=num+1
+				setCookie("runNum", newNum)
+				// sessionStorage.runNum.value=newNum
+			}
+		}else{
+			setCookie("runNum",document.getElementById("runNum").value)
+		}
+	}
+
+	function resetForm(){
+		document.getElementsByTagName("form")[0].reset() //return all the inputs to their defaults
+
+		//make sure all of the subject info inputs are editable
+		for(var i=0; i<inputs.length; i++){
+			inputs[i].disabled=false
+		}
+		document.getElementById("runNum").disabled=false
+		eraseAllCookies()
+		// sessionStorage.clear()
+		confirm.disabled=true
+		window.dispatchEvent(new Event("load"))
+
+	}
+
+	/*COOKIE FUNCTIONS*/
+	function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	}
+
+	function getCookie(name) {
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0;i < ca.length;i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+	        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	    }
+	    return null;
+	}
+
+	function eraseCookie(name) { 
+		console.log("erased ", name)  
+	    document.cookie = name+'=; Max-Age=-99999999;';  
+	}
+
+	function eraseAllCookies(){
+		var pairs=document.cookie.split(";")
+		var cookies={}
+		for(var i=0; i<pairs.length; i++){
+			var pair=pairs[i].split("=")
+			// cookies[(pair[0]+'').trim()]=unescape(pair[1])
+			eraseCookie((pair[0]+'').trim())
+		}
 	}
 
 </script>
-{% endblock %}
 </html>

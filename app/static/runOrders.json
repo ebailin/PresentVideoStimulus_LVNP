@@ -1,0 +1,24 @@
+{
+	"runA":[
+		["BLANK_HALLWAY", "High_L2R", "Medium_L2L", "NoPrinc_High2", "Low_R2L"], 
+		["BLANK_HALLWAY", "NoPrinc_High3", "Low_R2R", "High_R2L", "Medium_R2R"], 
+		["BLANK_HALLWAY", "Medium_L2L", "NoPrinc_High4", "Low_L2L", "High_L2L"], 
+		["BLANK_HALLWAY", "Low_R2L", "High_L2R", "Medium_R2L", "NoPrinc_High1"], 
+		["BLANK_HALLWAY","High_R2L", "Medium_R2R", "NoPrinc_High2", "Low_L2R"], 
+		["BLANK_HALLWAY", "High_R2R", "Medium_L2R", "Low_L2L", "NoPrinc_High1"]
+	],
+
+	"runB":[
+		["BLANK_HALLWAY", "NoPrinc_High3", "Low_R2R", "Medium_R2R", "High_L2R"], 
+		["BLANK_HALLWAY", "Low_R2L", "NoPrinc_High2", "Medium_L2R", "High_L2L"], 
+		["BLANK_HALLWAY", "NoPrinc_High3","Medium_R2L", "High_R2L", "Low_L2R"], 
+		["BLANK_HALLWAY", "High_L2R", "Low_R2R", "NoPrinc_High1", "Medium_L2L"], 
+		["BLANK_HALLWAY", "Medium_R2L", "High_R2R", "Low_L2L", "NoPrinc_High2"], 
+		["BLANK_HALLWAY", "Low_L2R", "NoPrinc_High4", "Medium_L2L", "High_R2L"]
+	],
+
+	"runTest":[
+		["High_L2L", "Low_L2L"] ,
+		["NoPrinc_High3", "Medium_R2L"]
+	]
+}

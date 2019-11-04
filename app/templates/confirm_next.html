@@ -1,0 +1,25 @@
+{% from "_form_macros.html" import render_field %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta pageEncoding="utf-8"/>
+<meta name="description" content="Displays the stimuli for the humna hallway fMRI study"/>
+<meta name="author" content="Emma Bailin" />
+<meta name="creation date" content="August 22, 2019"/>
+<meta name="modified" content="July 18, 2019"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<script src="jquery-3.4.1.min.js"></script>
+<style>
+
+</style>
+
+<form action="" method="post">
+	{{ form.hidden_tag() }}
+	<span>
+		{{ form.next }} {{ form.done }} {{ form.reset }}
+	</span>
+</form>
+
+
